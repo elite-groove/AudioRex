@@ -6,11 +6,13 @@ export class Animation {
     trigger('routeAnimations', [
       transition('* => *', [
         style({ opacity: 1 }),
-        query(':leave', [style({opacity: 1, position: 'absolute'})], {optional: true}),
-        query(':enter', [style({opacity: 0, position: 'absolute'})], {optional: true}),
+        query(':leave', [style({opacity: 1, position: 'absolute', width: '100%', height: '100%'})], {optional: true}),
+        query(':enter', [style({opacity: 0, position: 'absolute', width: '100%', height: '100%'})], {optional: true}),
         group([
-          query(':leave', [animate('1300ms ease-out', style({ opacity: 0, position: 'absolute' }))], {optional: true}),
-          query(':enter', [animate('1300ms ease-out', style({ opacity: 1, position: 'absolute' }))], {optional: true}),
+          query(':leave', [animate('1300ms ease-out',
+            style({ opacity: 0, position: 'absolute', width: '100%', height: '100%' }))], {optional: true}),
+          query(':enter', [animate('1300ms ease-out',
+            style({ opacity: 1, position: 'absolute', width: '100%', height: '100%' }))], {optional: true}),
         ])
       ])
     ]);

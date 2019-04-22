@@ -1,42 +1,35 @@
-/* eslint-disable no-unused-vars */
-class Service {
-  constructor (options) {
-    this.options = options || {};
+
+
+class UserDetailsService {
+  constructor(options) {
+    this.options = options;
   }
 
-  async find (params) {
-    return [];
+  find(params) {
+    return this.options.Model.find({}, (err, doc) => {
+      // console.log(doc);
+      return Promise.resolve(doc);
+    });
   }
+  get(id, params) {
+    console.log(id);
 
-  async get (id, params) {
-    return {
-      id, text: `A new message with ID: ${id}!`
-    };
   }
+  create(data, params) {
+    const UserDetails = new this.options.Model(data);
 
-  async create (data, params) {
-    if (Array.isArray(data)) {
-      return Promise.all(data.map(current => this.create(current, params)));
-    }
-
-    return data;
+    return UserDetails.save().then(resp => {
+        return Promise.resolve(resp);
+    }).catch(err => {
+      if(err) {
+        throw new Error(err.message);
+      }
+    });
   }
-
-  async update (id, data, params) {
-    return data;
-  }
-
-  async patch (id, data, params) {
-    return data;
-  }
-
-  async remove (id, params) {
-    return { id };
-  }
+  update(id, data, params) {}
+  patch(id, data, params) {}
+  remove(id, params) {}
+  setup(app, path) {}
 }
 
-module.exports = function (options) {
-  return new Service(options);
-};
-
-module.exports.Service = Service;
+module.exports = UserDetailsService;

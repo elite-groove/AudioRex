@@ -4,9 +4,10 @@
     <div class="col-md-6">
       <div class="form-login">
         <h4>Welcome back.</h4>
-        <input type="text" id="email" name="email" class="form-control input-sm chat-input my-2" placeholder="Email"/>
-        <input type="text" id="userPassword" name="password" class="form-control input-sm chat-input my-2" placeholder="password" type="password"/>
-        <input type="text" id="sonideroName" name="business-name" class="form-control input-sm chat-input my-2" placeholder="Nombre de DJ"/>
+        <input type="text" [(ngModel)]="user.email" id="email" name="email" class="form-control input-sm chat-input my-2" placeholder="Email"/>
+        <input type="text" [(ngModel)]="user.password" id="userPassword" name="password" class="form-control input-sm chat-input my-2" placeholder="password" type="password"/>
+        <input type="text" [(ngModel)]="user.sonidero_name" id="sonideroName" name="business-name" class="form-control input-sm chat-input my-2" placeholder="Nombre de DJ"/>
+        <input type="text" (change)="uploadAvatar($event)" id="sonideroName" name="business-name" class="form-control input-sm chat-input my-2"/>
         <div class="wrapper">
           <span class="group-btn">
             <div class="btn btn-primary btn-md">Register</div>

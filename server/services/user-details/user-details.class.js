@@ -6,14 +6,15 @@ class UserDetailsService {
   }
 
   find(params) {
-    return this.options.Model.find({}, (err, doc) => {
-      // console.log(doc);
+    return this.options.Model.find({associated_acc: params.id}, (err, doc) => {
       return Promise.resolve(doc);
     });
   }
   get(id, params) {
     console.log(id);
-
+    return this.options.Model.find({associated_acc: id}, (err, doc) => {
+      return Promise.resolve(doc);
+    });
   }
   create(data, params) {
     const UserDetails = new this.options.Model(data);

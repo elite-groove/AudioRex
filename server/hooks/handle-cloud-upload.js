@@ -25,11 +25,10 @@ module.exports = function (options = {}) {
   return async context => {
     const path = context.app.get('public') + '/' + context.result.id;
     return uploadCloudinary(path).then(res => {
-      context.result.cloud_url = res;
+      context.result = res;
       return context;
     }).catch(err => {
       throw new Error(err.message);
     });
-    // return context;
   };
 };

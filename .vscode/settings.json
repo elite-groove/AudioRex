@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorStyle": "underline"
+}

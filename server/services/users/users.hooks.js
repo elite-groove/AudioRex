@@ -6,6 +6,8 @@ const {
 
 const validateEmail = require('../../hooks/validate-email');
 
+const handleUserCreation = require('../../hooks/handle-user-creation');
+
 module.exports = {
   before: {
     all: [],
@@ -25,7 +27,7 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [],
+    create: [handleUserCreation()],
     update: [],
     patch: [],
     remove: []

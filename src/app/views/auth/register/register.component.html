@@ -4,15 +4,56 @@
     <div class="col-md-6">
       <div class="form-login">
         <h4>Welcome back.</h4>
-        <input type="text" [(ngModel)]="user.email" id="email" name="email" class="form-control input-sm chat-input my-2" placeholder="Email"/>
-        <input type="text" [(ngModel)]="user.password" id="userPassword" name="password" class="form-control input-sm chat-input my-2" placeholder="password" type="password"/>
-        <input type="text" [(ngModel)]="user.sonidero_name" id="sonideroName" name="business-name" class="form-control input-sm chat-input my-2" placeholder="Nombre de DJ"/>
-        <input type="text" (change)="uploadAvatar($event)" id="sonideroName" name="business-name" class="form-control input-sm chat-input my-2"/>
-        <div class="wrapper">
-          <span class="group-btn">
-            <div class="btn btn-primary btn-md">Register</div>
-          </span>
+        <div *ngIf="
+          (email.invalid && (email.dirty || email.touched)) ||
+          (password.invalid && (password.dirty || password.touched)) ||
+          (sonidero_name.invalid && (sonidero_name.dirty || sonidero_name.touched))
+        " class="alert alert-danger my-2">
+          <div *ngIf="email.errors?.required">
+            {{ 'Email is required.' }}
+          </div>
+          <div *ngIf="email.errors?.email">
+            {{ 'Please enter a valid Email' }}
+          </div>
+          <div *ngIf="password.errors?.minlength">
+            {{ 'Password is too short' }}
+          </div>
+          <div *ngIf="password.errors?.maxlength">
+            {{ 'Password is too long' }}
+          </div>
+          <div *ngIf="password.errors?.required">
+            {{ 'Please provide a password' }}
+          </div>
+          <div *ngIf="sonidero_name.errors?.maxlength">
+            {{ 'Name is too long' }}
+          </div>
+          <div *ngIf="sonidero_name.errors?.required">
+            {{ 'Sonidero name is required' }}
+          </div>
         </div>
+        <form (submit)="registerUser(user)" [formGroup]="registerForm">
+          <input type="email" formControlName="email" id="email" name="email"
+            class="form-control input-sm chat-input my-2" 
+            placeholder="Email" 
+            required />
+          <input type="password" formControlName="password" id="userPassword" name="password"
+            class="form-control input-sm chat-input my-2" 
+            placeholder="password" 
+            type="password" 
+            required
+           />
+          <input type="text" formControlName="sonidero_name" id="sonideroName" name="business-name"
+            class="form-control input-sm chat-input my-2" 
+            placeholder="Nombre de DJ" 
+            required />
+          <input type="file" (change)="fileChange($event)" name="avatar"
+            class="form-control input-sm chat-input my-2" />
+          <div class="wrapper">
+            <span class="group-btn">
+              <button class="btn btn-primary btn-md" type="submit">Register</button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
     <div class="col-md-3"></div>

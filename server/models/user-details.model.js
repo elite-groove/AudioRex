@@ -10,6 +10,7 @@ module.exports = function (app) {
     email: { type: String, required: true },
     description: { type: String },
     associated_acc: { type: String, required: true },
+    avatar: { type: String }
   }, {
     timestamps: true
   });

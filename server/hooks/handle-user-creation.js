@@ -5,17 +5,26 @@
 module.exports = function (options = {}) {
   return async context => {
     console.log(context.result);
-    const userService = context.app.service('user-details');
-    const user = context.result;
-    
-    user.associated_acc = user._id;
-    delete user._id;
+    const userDetailService = context.app.service('user-details');
+    const storage = context.app.service('storage');
 
-    return userService.create(context.result).then(
-      resp => {
-        context.result = resp;
-        return context;
+    const user = context.result;
+
+    // upload avatar
+    return storage.create({uri: user.avatar}).then(
+      avatar => {
+        console.log(avatar);
+        throw new Error(avatar);
       }
     );
+    // get url of avatar
+    // save url along with the rest of the user details 
+
+    // return userDetailService.create(context.result).then(
+    //   resp => {
+    //     context.result = resp;
+    //     // return context;
+    //   }
+    // );
   };
 };

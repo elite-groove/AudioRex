@@ -39,8 +39,12 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;
-    console.log(user);
-    // this.authService.registerUser(user);
+    // console.log(user);
+    this.authService.registerUser(user).toPromise().then(
+      resp => {
+        console.log(resp);
+      }
+    );
   }
 
   // create shortcut for pulling values from the FormGroup

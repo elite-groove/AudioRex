@@ -8,7 +8,7 @@ module.exports = function (options = {}) {
 
     return emailExists.toArray().then(
       email => {
-        console.log(email);
+        // console.log(email);
         if (email.length) {
           throw new Error('Email already exists');
         } else {

@@ -11,7 +11,6 @@ cloudinary.config({
 const uploadCloudinary = (path) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(path, (error, result) => {
-      console.log(result, error);
       if(error) {
         reject(error);
       }

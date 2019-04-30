@@ -8,12 +8,14 @@ const validateEmail = require('../../hooks/validate-email');
 
 const handleUserCreation = require('../../hooks/handle-user-creation');
 
+const handleUserToken = require('../../hooks/handle-user-token');
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [hashPassword(), validateEmail()],
+    create: [hashPassword(), validateEmail(), handleUserToken()],
     update: [ hashPassword(),  authenticate('jwt') ],
     patch: [ hashPassword(),  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]

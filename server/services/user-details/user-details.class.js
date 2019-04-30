@@ -17,10 +17,12 @@ class UserDetailsService {
     });
   }
   create(data, params) {
+    // console.log('\n data in \n', data,'\n data in \n');
     const UserDetails = new this.options.Model(data);
 
     return UserDetails.save().then(resp => {
-        return Promise.resolve(resp);
+      // console.log('\n saved id \n', resp._id,'\n saved id \n');
+        return resp._doc;
     }).catch(err => {
       if(err) {
         throw new Error(err.message);

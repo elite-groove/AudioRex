@@ -4,6 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
+    console.log(context);
     const emailExists = context.service.Model.find( { email: { $eq: context.data.email } });
 
     return emailExists.toArray().then(

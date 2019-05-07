@@ -7,10 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _window: Window) { }
 
   registerUser(user) {
     return this.http.post(environment.host + '/users', user);
+  }
+
+  saveToken(token) {
+    this._window.localStorage['token'] = token;
   }
 
   loginUser() {

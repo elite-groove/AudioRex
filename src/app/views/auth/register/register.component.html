@@ -5,6 +5,7 @@
       <div class="form-login">
         <h4>Welcome back.</h4>
         <div *ngIf="
+          (serverError) ||
           (email.invalid && (email.dirty || email.touched)) ||
           (password.invalid && (password.dirty || password.touched)) ||
           (sonidero_name.invalid && (sonidero_name.dirty || sonidero_name.touched))
@@ -30,8 +31,11 @@
           <div *ngIf="sonidero_name.errors?.required">
             {{ 'Sonidero name is required' }}
           </div>
+          <div *ngIf="serverError.message">
+            {{ serverError.message }}
+          </div>
         </div>
-        <form (submit)="registerUser(user)" [formGroup]="registerForm">
+        <form (submit)="registerUser($event)" [formGroup]="registerForm">
           <input type="email" formControlName="email" id="email" name="email"
             class="form-control input-sm chat-input my-2" 
             placeholder="Email" 

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { PlyrModule } from 'ngx-plyr';
 
 // Bootstrap
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // classes
 import { DefaultPlyrDriver } from './classes/default-plyr-driver';
@@ -26,6 +26,7 @@ import { ProfileComponent } from './views/users/profile/profile.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { RegisterComponent } from './views/auth/register/register.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -48,11 +49,16 @@ import { RegisterComponent } from './views/auth/register/register.component';
     PlyrModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => window.localStorage['token']
+      }
+    })
   ],
   providers: [
     DefaultPlyrDriver
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

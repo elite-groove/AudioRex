@@ -1,20 +1,46 @@
 <div class="container">
-  <div class="row">
+    <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-          <div class="form-login">
+        <div class="form-login">
           <h4>Welcome back.</h4>
-          <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-          <br>
-          <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-          <br>
-          <div class="wrapper">
-          <span class="group-btn">     
-              <div class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></div>
-          </span>
+          <div *ngIf="
+            (serverError) ||
+            (email.invalid && (email.dirty || email.touched)) ||
+            (password.invalid && (password.dirty || password.touched))
+          " class="alert alert-danger my-2">
+            <div *ngIf="email.errors?.required">
+              {{ 'Email is required.' }}
+            </div>
+            <div *ngIf="email.errors?.email">
+              {{ 'Please enter a valid Email' }}
+            </div>
+            <div *ngIf="password.errors?.required">
+              {{ 'Please provide a password' }}
+            </div>
+            <div *ngIf="serverError.message">
+              {{ serverError.message }}
+            </div>
           </div>
-          </div>
+          <form (submit)="login($event)" [formGroup]="registerForm">
+            <input type="email" formControlName="email" id="email" name="email"
+              class="form-control input-sm chat-input my-2" 
+              placeholder="Email" 
+              required />
+            <input type="password" formControlName="password" id="userPassword" name="password"
+              class="form-control input-sm chat-input my-2" 
+              placeholder="password" 
+              type="password" 
+              required
+             />
+            <div class="wrapper">
+              <span class="group-btn">
+                <button class="btn btn-primary btn-md" type="submit">Register</button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="col-md-3"></div>
+    </div>
   </div>
-</div>

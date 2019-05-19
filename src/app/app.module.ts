@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -26,6 +28,11 @@ import { ProfileComponent } from './views/users/profile/profile.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { RegisterComponent } from './views/auth/register/register.component';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -48,10 +55,19 @@ import { RegisterComponent } from './views/auth/register/register.component';
     PlyrModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgZorroAntdModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['example.com/examplebadroute/']
+      }
+    })
   ],
   providers: [
-    DefaultPlyrDriver
+    DefaultPlyrDriver,
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent],
 })

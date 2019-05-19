@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { PlyrModule } from 'ngx-plyr';
 
 // Bootstrap
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // classes
 import { DefaultPlyrDriver } from './classes/default-plyr-driver';
@@ -31,6 +31,7 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { TokenGetter } from './classes/token-getter';
 
 registerLocaleData(en);
 
@@ -59,8 +60,8 @@ registerLocaleData(en);
     NgZorroAntdModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: ['example.com'],
+        tokenGetter: TokenGetter,
+        whitelistedDomains: ['http://localhost:3000'],
         blacklistedRoutes: ['example.com/examplebadroute/']
       }
     })
@@ -71,4 +72,4 @@ registerLocaleData(en);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

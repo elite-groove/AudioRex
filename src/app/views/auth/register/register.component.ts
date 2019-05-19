@@ -4,6 +4,7 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -14,12 +15,14 @@ export class RegisterComponent implements OnInit {
   public user = {
     email: '',
     password: '',
-    sonidero_name: ''    
+    sonidero_name: ''
+  };
+  public serverError = {
+    message: ''
   };
 
   private chosenFile;
   registerForm: any;
-  serverError: any;
 
   constructor(private utilService: UtilityService, private authService: AuthenticationService, private router: Router) { }
 
@@ -32,7 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   fileChange($event) {
-    const reader  = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL($event.target.files[0]);
     reader.onload = () => {
       this.chosenFile = reader.result;
@@ -40,28 +43,28 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser($e) {
+    console.log(this.serverError);
     $e.preventDefault();
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;
-    // console.log(user);
-    this.authService.registerUser(user).toPromise().then(
-      resp => {
-        console.log(resp);
-        if(resp) {
-          this.router.navigate(['/']);
+    console.log(this.authService.registerUser);
+    this.authService.registerUser(user).subscribe(
+      (user: User) => {
+        console.log((user));
+        if ((user)) {
+          this.authService.saveToken((user).token.accessToken);
+          this.router.navigate(['/home']);
         }
       }
-    ).catch((errResponse: HttpErrorResponse) => {
-      this.serverError = errResponse.error;
-    });
+    );
   }
 
   // create shortcut for pulling values from the FormGroup
 
   get email() { return this.registerForm.get('email'); }
-  
+
   get password() { return this.registerForm.get('password'); }
-  
+
   get sonidero_name() { return this.registerForm.get('sonidero_name'); }
 
 }

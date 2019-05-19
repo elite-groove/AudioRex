@@ -1,61 +1,73 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+import { Token } from 'src/app/interfaces/token';
 import { BehaviorSubject } from 'rxjs';
-import { getToken } from '@angular/router/src/utils/preactivation';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { UtilityService } from '../utility.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public _window: Window = window;
-  public _authConfig = {
+  _window: Window = window;
+  _authConfig = {
     isLoggedIn: false
-  };
-  public authConfig = new BehaviorSubject<any>(this._authConfig);
+  }
+  authConfig = new BehaviorSubject<any>(this._authConfig);
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private utility: UtilityService) { 
     this.authConfig.subscribe(
       authConfig => {
         this._authConfig = authConfig;
       }
     );
-
-    const token = this.getToken();
-    if(token) {
-      this.updateUserStatus(true);
-    }
+    
+    // iniitalize user logged in state
+    this.checkLoggedIn();
   }
 
-  registerUser(user) {
+  saveToken(token: Token) {
+    this._window.localStorage['token'] = token.accessToken;
+    this.updateLoggedInStatus(true);
+  }
+
+  saveUserId(user) {
+    this._window.localStorage['uid'] = user._id;
+  }
+
+  getUserId() {
+    return this._window.localStorage['uid'];
+  }
+
+  googleLogin() {
+    return this._window.location.href = (environment.host + '/auth/google/callback');
+  }
+
+  localLogin(data) {
+    return this.http.post(environment.host + '/authentication', data);
+  }
+
+  localRegister(user) {
+    console.log(user);
     return this.http.post(environment.host + '/users', user);
-  }
-
-  saveToken(token) {
-    this._window.localStorage['token'] = token;
-    this.updateUserStatus(true);
-  }
-
-  logout() {
-    this._window.localStorage.removeItem('token');
-    this.updateUserStatus(false);
-    this.router.navigate(['/home']);
-  }
-
-  updateUserStatus(status: boolean) {
-    this._authConfig.isLoggedIn = status;
-    this.authConfig.next(this._authConfig);
   }
 
   checkLoggedIn() {
     const isLoggedIn = this._window.localStorage['token'] ? !this.jwtHelper.isTokenExpired() : false;
-    this.updateUserStatus(isLoggedIn);
+    this.updateLoggedInStatus(isLoggedIn);
     return isLoggedIn;
   }
 
-  login(user) {
-    user.strategy = 'local';
-    return this.http.post(environment.host + '/authentication', user);
+  updateLoggedInStatus(status: boolean) {
+    this._authConfig.isLoggedIn = status;
+    this.authConfig.next(this._authConfig);
+  }
+
+  logout() {
+    this._window.localStorage.removeItem('token');
+    this._window.localStorage.removeItem('uid');
+    this.utility.createNotification('success', 'Session', 'Session se cerro.')
+    this.updateLoggedInStatus(false);
   }
 }

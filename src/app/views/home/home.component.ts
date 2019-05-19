@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  rotateCard(card: HTMLElement) {
+  rotateCard(card: HTMLElement, private userService: UserService) {
     console.log(card);
     card.classList.toggle('hover');
   }

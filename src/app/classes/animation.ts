@@ -9,9 +9,9 @@ export class Animation {
         query(':leave', [style({opacity: 1, position: 'absolute', width: '100%', height: '100%'})], {optional: true}),
         query(':enter', [style({opacity: 0, position: 'absolute', width: '100%', height: '100%'})], {optional: true}),
         group([
-          query(':leave', [animate('1300ms ease-out',
+          query(':leave', [animate('900ms ease-out',
             style({ opacity: 0, position: 'absolute', width: '100%', height: '100%' }))], {optional: true}),
-          query(':enter', [animate('1300ms ease-out',
+          query(':enter', [animate('900ms ease-out',
             style({ opacity: 1, position: 'absolute', width: '100%', height: '100%' }))], {optional: true}),
         ])
       ])

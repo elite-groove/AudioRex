@@ -1,3 +1,3 @@
 export function TokenGetter() {
-    return localStorage.getItem('token');
+    return window.localStorage['token'];
 }

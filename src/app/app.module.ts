@@ -15,8 +15,19 @@ import { PlyrModule } from 'ngx-plyr';
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// ng zorro
+import { NzCardModule } from 'ng-zorro-antd';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
+
+
 // classes
 import { DefaultPlyrDriver } from './classes/default-plyr-driver';
+
+
+//icon 
+import { SettingOutline, EditOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ SettingOutline, EditOutline ];
 
 // views
 import { HomeComponent } from './views/home/home.component';
@@ -28,10 +39,10 @@ import { ProfileComponent } from './views/users/profile/profile.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { RegisterComponent } from './views/auth/register/register.component';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { TokenGetter } from './classes/token-getter';
+import { DateformatPipe } from './pipes/dateformat.pipe';
 
 registerLocaleData(en);
 
@@ -46,7 +57,8 @@ registerLocaleData(en);
     ProfileComponent,
     LoginComponent,
     AuthComponent,
-    RegisterComponent
+    RegisterComponent,
+    DateformatPipe
   ],
   imports: [
     BrowserModule,
@@ -58,6 +70,7 @@ registerLocaleData(en);
     HttpClientModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
+    NzCardModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: TokenGetter,
@@ -68,7 +81,8 @@ registerLocaleData(en);
   ],
   providers: [
     DefaultPlyrDriver,
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_ICONS, useValue: icons }
   ],
   bootstrap: [AppComponent],
 })

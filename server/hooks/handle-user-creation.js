@@ -5,7 +5,7 @@ const handleRegistration = (context) => {
   return new Promise((resolve, reject) => {
     // needs refactoring
 
-    const userDetailService = context.app.service('user-details');
+    const userDetailService = context.app.service('user-db');
     const storage = context.app.service('storage');
 
     const user = context.params;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilityService } from 'src/app/services/global/utility.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Token } from 'src/app/interfaces/token';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   registerForm: any;
   serverError: any;
 
-  constructor(private authService: AuthenticationService, private router: Router, private utilityService: UtilityService) { }
+  constructor(private authService: AuthenticationService, private router: Router, private utility: UtilityService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -34,17 +35,19 @@ export class LoginComponent implements OnInit {
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;
     // console.log(user);
-    this.authService.login(user).toPromise().then(
-      (resp: any) => {
-        console.log(resp);
-        this.authService.saveToken(resp.accessToken);
-        if(resp) {
+    this.authService.localLogin(user).subscribe(
+      (token: Token) => {
+        console.log(token);
+        this.authService.saveToken(token);
+        this.utility.createNotification('success', 'Success', 'You are now logged in.');
+        if(token) {
           this.router.navigate(['/']);
         }
+      }, (err: HttpErrorResponse) => {
+        console.log(err);
+        this.serverError = err.error;
       }
-    ).catch((errResponse: HttpErrorResponse) => {
-      this.serverError = errResponse.error;
-    });
+    )
   }
 
   // create shortcut for pulling values from the FormGroup

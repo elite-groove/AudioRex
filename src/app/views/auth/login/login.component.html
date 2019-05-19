@@ -18,7 +18,7 @@
             <div *ngIf="password.errors?.required">
               {{ 'Please provide a password' }}
             </div>
-            <div *ngIf="serverError.message">
+            <div *ngIf="serverError?.message">
               {{ serverError.message }}
             </div>
           </div>

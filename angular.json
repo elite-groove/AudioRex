@@ -34,7 +34,8 @@
             "styles": [
               "src/theme.less",
               "src/styles.scss",
-              "node_modules/plyr/dist/plyr.css"
+              "node_modules/plyr/dist/plyr.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

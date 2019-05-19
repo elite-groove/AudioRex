@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilityService } from 'src/app/services/global/utility.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
+import { Token } from 'src/app/interfaces/token';
+import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
   selector: 'app-register',
@@ -47,12 +46,11 @@ export class RegisterComponent implements OnInit {
     $e.preventDefault();
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;
-    console.log(this.authService.registerUser);
-    this.authService.registerUser(user).subscribe(
-      (user: User) => {
-        console.log((user));
-        if ((user)) {
-          this.authService.saveToken((user).token.accessToken);
+    this.authService.localRegister(user).subscribe(
+      (token: Token) => {
+        console.log((token));
+        if (token) {
+        this.authService.saveToken(token);
           this.router.navigate(['/home']);
         }
       }

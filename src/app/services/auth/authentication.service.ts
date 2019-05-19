@@ -45,6 +45,7 @@ export class AuthenticationService {
   }
 
   localLogin(data) {
+    data.strategy = 'local';
     return this.http.post(environment.host + '/authentication', data);
   }
 
@@ -67,7 +68,7 @@ export class AuthenticationService {
   logout() {
     this._window.localStorage.removeItem('token');
     this._window.localStorage.removeItem('uid');
-    this.utility.createNotification('success', 'Session', 'Session se cerro.')
+    this.utility.createNotification('success', 'Session', 'You logged out.')
     this.updateLoggedInStatus(false);
   }
 }

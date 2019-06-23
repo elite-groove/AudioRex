@@ -47,6 +47,7 @@ import { DateformatPipe } from './pipes/dateformat.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './classes/custom-url-serializer';
 import { DatestringPipe } from './pipes/datestring.pipe';
+import { PlaylistComponent } from './views/users/playlist/playlist.component';
 
 registerLocaleData(en);
 
@@ -63,7 +64,8 @@ registerLocaleData(en);
     AuthComponent,
     RegisterComponent,
     DateformatPipe,
-    DatestringPipe
+    DatestringPipe,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,

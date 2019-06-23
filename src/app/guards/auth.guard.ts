@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
       (authConfig: AuthConfig) => {
         this.authConfig = authConfig;
         if (this.authConfig.isLoggedIn ||  (localStorage['token'] && !this.jwtHelper.isTokenExpired())) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/users']);
         }
       }
     ));

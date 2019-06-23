@@ -22,7 +22,9 @@
         <i nz-icon type="edit"></i>
       </ng-template> -->
       <ng-template #actionEllipsis>
-        <i nz-icon type="ellipsis"></i>
+        <div [routerLink]="['/users/' + user._id]">
+          <i nz-icon type="arrow-right"></i>
+        </div>
       </ng-template>
     </div>
   </div>

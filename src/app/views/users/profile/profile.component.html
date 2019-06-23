@@ -4,28 +4,33 @@
     <div class="jumbotron">
       <div class="row">
         <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4 d-flex justify-content-center p-5">
-          <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png"
+          <img width="30%" [src]="profile?.avatar"
             alt="stack photo" class="img">
         </div>
         <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
           <div class="container" style="border-bottom:1px solid black">
-            <h2>John Doe</h2>
+            <h2>{{ profile.sonidero_name }}</h2>
           </div>
           <hr>
           <ul class="container details">
             <li>
-              <p><span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>+91 90000 00000</p>
+              <!-- <p><span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>+91 90000 00000</p> -->
             </li>
             <li>
-              <p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>somerandom@email.com</p>
+              <p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>{{ profile.email }}</p>
             </li>
             <li>
-              <p><span class="glyphicon glyphicon-map-marker one" style="width:50px;"></span>Hyderabad</p>
+              <p><span class="glyphicon glyphicon-map-marker one" style="width:50px;"></span>Member since {{ profile.createdAt | datestring }}</p>
             </li>
             <li>
-              <p><span class="glyphicon glyphicon-new-window one" style="width:50px;"></span>www.example.com</p>
+              <!-- <p><span class="glyphicon glyphicon-new-window one" style="width:50px;"></span>www.example.com</p> -->
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <mat-basic-audio-player [audioUrl]="msbapAudioUrl" [title]="msbapTitle" [displayTitle]="msbapDisplayTitle"></mat-basic-audio-player>
         </div>
       </div>
     </div>

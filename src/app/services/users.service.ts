@@ -13,4 +13,8 @@ export class UsersService {
   getUsers() {
     return this.http.get(environment.host + '/user-db');
   }
+
+  getUser(uid) {
+    return this.http.get(environment.host + '/user-db/' + uid);
+  }
 }

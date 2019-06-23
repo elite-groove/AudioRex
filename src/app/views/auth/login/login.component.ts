@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/interfaces/token';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ModelConfigService } from 'src/app/services/model-config.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   registerForm: any;
   serverError: any;
 
-  constructor(private authService: AuthenticationService, private router: Router, private utility: UtilityService) { }
+  constructor(private authService: AuthenticationService, private router: Router, private utility: UtilityService, private modelService: ModelConfigService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login($e) {
+    this.modelService.setLoading(true);
     $e.preventDefault();
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;

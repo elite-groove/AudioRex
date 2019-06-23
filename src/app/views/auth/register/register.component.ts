@@ -4,6 +4,10 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/interfaces/token';
 import { UtilityService } from 'src/app/services/utility.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ModelConfigService } from 'src/app/services/model-config.service';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -21,9 +25,19 @@ export class RegisterComponent implements OnInit {
   };
 
   private chosenFile;
+  private subscriptions = new Subscription();
   registerForm: any;
+  modelConf: any;
 
-  constructor(private utilService: UtilityService, private authService: AuthenticationService, private router: Router) { }
+  constructor(private utility: UtilityService, private authService: AuthenticationService, private router: Router, private modelService: ModelConfigService) { 
+    this.subscriptions.add(
+      this.modelService.modelConfig.subscribe(
+        modelConf => {
+          this.modelConf = modelConf;
+        }
+      )
+    );
+  }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -42,17 +56,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser($e) {
-    console.log(this.serverError);
+    this.modelService.setLoading(true);
     $e.preventDefault();
     const user = this.registerForm.value;
     user.avatar = this.chosenFile;
     this.authService.localRegister(user).subscribe(
-      (token: Token) => {
-        console.log((token));
-        if (token) {
-        this.authService.saveToken(token);
-          this.router.navigate(['/home']);
+      (user: User) => {
+        console.log((user.token));
+        if (user.token) {
+          this.authService.saveToken(user.token);
+          this.router.navigate(['/users']);
+          this.utility.createNotification('success', 'Success', 'You are now registered.');
+          this.modelService.setLoading(false);
         }
+      }, (httpErr: HttpErrorResponse) => {
+        console.log(httpErr);
+        this.utility.createNotification('error', 'Error', httpErr.error.message);
+        this.modelService.setLoading(false);
       }
     );
   }

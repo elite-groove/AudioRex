@@ -44,7 +44,7 @@ module.exports = function (options = {}) {
 
     return handleRegistration(context).then(
       savedUser => {
-        console.log('\nresults\n', savedUser.data, '\nresults\n');
+        // console.log('\nresults\n', savedUser.data, '\nresults\n');
         return savedUser;
       }
     );

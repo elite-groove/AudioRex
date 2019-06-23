@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 // plyr module
 import { PlyrModule } from 'ngx-plyr';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +44,9 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { TokenGetter } from './classes/token-getter';
 import { DateformatPipe } from './pipes/dateformat.pipe';
+import { UrlSerializer } from '@angular/router';
+import { CustomUrlSerializer } from './classes/custom-url-serializer';
+import { DatestringPipe } from './pipes/datestring.pipe';
 
 registerLocaleData(en);
 
@@ -58,7 +62,8 @@ registerLocaleData(en);
     LoginComponent,
     AuthComponent,
     RegisterComponent,
-    DateformatPipe
+    DateformatPipe,
+    DatestringPipe
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NgZorroAntdModule,
     NzCardModule,
+    NgxAudioPlayerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: TokenGetter,
@@ -82,7 +88,8 @@ registerLocaleData(en);
   providers: [
     DefaultPlyrDriver,
     { provide: NZ_I18N, useValue: en_US },
-    { provide: NZ_ICONS, useValue: icons }
+    { provide: NZ_ICONS, useValue: icons },
+    { provide: UrlSerializer, useClass: CustomUrlSerializer }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,13 @@
+:host {
+  nz-spin {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(150, 150, 150, 0.35);
+    top: 0;
+    left: 0;
+  }
+}

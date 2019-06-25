@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-const handleDeleteSong = require('../../hooks/handle-delete-song');
+const handleAddSong = require('../../hooks/handle-add-song');
 
 module.exports = {
   before: {
@@ -17,10 +17,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [handleAddSong()],
     update: [],
     patch: [],
-    remove: [handleDeleteSong()]
+    remove: []
   },
 
   error: {

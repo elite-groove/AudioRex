@@ -12,6 +12,8 @@ const songs = require('./songs/songs.service.js');
 
 const uploadSongs = require('./upload-songs/upload-songs.service.js');
 
+const addSongs = require('./add-songs/add-songs.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -21,4 +23,5 @@ module.exports = function (app) {
   app.configure(albums);
   app.configure(songs);
   app.configure(uploadSongs);
+  app.configure(addSongs);
 };

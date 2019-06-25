@@ -13,7 +13,7 @@ function createAlbum(app, context) {
   // Song
   const { song } = context.data; // req body should contain song props
   song._id = new mongooseClient.Types.ObjectId();
-  console.log(song);
+  // console.log(song);
   const createdSong = new SongModel({ ...song });
 
   createdSong.save((err) => {

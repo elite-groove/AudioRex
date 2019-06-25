@@ -7,6 +7,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const albums = new Schema({
     name: {type: String, required: true},
+    description: {type: String, required: true},
     songs: [{ type: Schema.Types.ObjectId, ref: 'songs' }]
   }, {
     timestamps: true

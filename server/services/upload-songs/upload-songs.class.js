@@ -15,7 +15,7 @@ class Service {
   }
 
   async create (data, params) {
-    return {message: 'Song Uploaded Successfully'};
+    return data;
   }
 
   async update (id, data, params) {

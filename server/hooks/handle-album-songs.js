@@ -16,11 +16,15 @@ function createAlbum(app, context) {
   // console.log(song);
   const createdSong = new SongModel({ ...song });
 
+  // Album
+  const { album } = context.data; // req body should contain album props
+  album._id = new mongooseClient.Types.ObjectId();
+
+  // assign album reference to the song being created
+  createdSong.album = album._id;
+
   createdSong.save((err) => {
     if(err) throw new Error(err);
-
-    // Album
-    const { album } = context.data; // req body should contain album props
 
     const createdAlbum = new AlbumModel({ ...album }); // create new album with song
     

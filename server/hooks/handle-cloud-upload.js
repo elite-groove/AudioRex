@@ -2,11 +2,11 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const cloudinary = require('cloudinary').v2;
 
-cloudinary.config({ 
-  cloud_name: 'hmakvyfmx', 
-  api_key: '362885389597267', 
-  api_secret: 'c4qCc4iR4-Lb22x26jgj4Umw5uA' 
-});
+// cloudinary.config({ 
+//   cloud_name: 'hmakvyfmx', 
+//   api_key: '362885389597267', 
+//   api_secret: 'c4qCc4iR4-Lb22x26jgj4Umw5uA' 
+// });
 
 const uploadCloudinary = (path) => {
   return new Promise((resolve, reject) => {

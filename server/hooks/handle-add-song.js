@@ -10,12 +10,13 @@ function addSong(app, context) {
 
     const song = new SongModel(context.data.song);
 
+    song.album = context.data.albumId;
+
     song.save(
       (err, updatedSong) => {
         AlbumModel.findById(context.data.albumId).exec(
           (err, album) => {
             if (err) throw new Error(err);
-
             // push new song to album
             album.songs.push(updatedSong._id);
 

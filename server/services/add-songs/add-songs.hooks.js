@@ -1,6 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
 const handleAddSong = require('../../hooks/handle-add-song');
+const songUploadToCloud = require('../../hooks/song-upload-to-cloud');
 
 module.exports = {
   before: {
@@ -17,7 +18,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [handleAddSong()],
+    create: [songUploadToCloud(), handleAddSong()],
     update: [],
     patch: [],
     remove: []

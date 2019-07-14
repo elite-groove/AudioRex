@@ -1,0 +1,23 @@
+<div class="p-5">
+  <nz-steps [nzCurrent]="current" nzSize="small">
+    <nz-step nzTitle="Finished"></nz-step>
+    <nz-step nzTitle="In Progress"></nz-step>
+    <nz-step nzTitle="Waiting"></nz-step>
+  </nz-steps>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 p-5">
+      <nz-upload nzType="drag" [nzMultiple]="true" [nzLimit]="2" nzAction="https://jsonplaceholder.typicode.com/posts/"
+        (nzChange)="handleChange($event)">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
+      </nz-upload>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

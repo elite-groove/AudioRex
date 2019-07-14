@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // plyr module
-import { PlyrModule } from 'ngx-plyr';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 // Bootstrap
@@ -20,11 +19,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzCardModule } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
-
-
-// classes
-import { DefaultPlyrDriver } from './classes/default-plyr-driver';
-
 
 //icon 
 import { SettingOutline, EditOutline } from '@ant-design/icons-angular/icons';
@@ -76,7 +70,6 @@ registerLocaleData(en);
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
-    PlyrModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -92,7 +85,6 @@ registerLocaleData(en);
     })
   ],
   providers: [
-    DefaultPlyrDriver,
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },
     { provide: UrlSerializer, useClass: CustomUrlSerializer }

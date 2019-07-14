@@ -6,7 +6,31 @@
   </nz-steps>
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-6 p-5">
+    <div class="col-md-6 p-5" *ngIf="current === 0">
+      <nz-upload nzType="drag" [nzMultiple]="true" [nzLimit]="2" nzAction="https://jsonplaceholder.typicode.com/posts/"
+        (nzChange)="handleChange($event)">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
+      </nz-upload>
+    </div>
+    <div class="col-md-6 p-5" *ngIf="current === 1">
+      <nz-upload nzType="drag" [nzMultiple]="true" [nzLimit]="2" nzAction="https://jsonplaceholder.typicode.com/posts/"
+        (nzChange)="handleChange($event)">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
+      </nz-upload>
+    </div>
+    <div class="col-md-6 p-5" *ngIf="current === 2">
       <nz-upload nzType="drag" [nzMultiple]="true" [nzLimit]="2" nzAction="https://jsonplaceholder.typicode.com/posts/"
         (nzChange)="handleChange($event)">
         <p class="ant-upload-drag-icon">

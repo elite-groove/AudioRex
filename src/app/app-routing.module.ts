@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   { path: 'chat', component: ChatComponent, data: { animation: 'anim-2' } },
   {
-    path: 'auth', component: AuthComponent, canActivate: [AuthGuard], data: { animation: 'anim-4' },
+    path: 'auth', component: AuthComponent, data: { animation: 'anim-4' },
     children: [
       { path: 'login', component: LoginComponent, data: { animation: 'anim-4-1' } },
       { path: 'register', component: RegisterComponent, data: { animation: 'anim-4-2' } }

@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(token);
         this.authService.saveToken(token);
         this.utility.createNotification('success', 'Success', 'You are now logged in.');
+        this.modelService.setLoading(false);
         if(token) {
           this.router.navigate(['/']);
         }

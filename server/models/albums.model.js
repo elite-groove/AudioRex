@@ -8,6 +8,7 @@ module.exports = function (app) {
   const albums = new Schema({
     name: {type: String, required: true},
     description: {type: String, required: true},
+    associated_acc: {type: String, required: true},
     songs: [{ type: Schema.Types.ObjectId, ref: 'songs' }]
   }, {
     timestamps: true

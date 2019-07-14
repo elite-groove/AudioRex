@@ -8,13 +8,22 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PlaylistComponent } from './views/users/playlist/playlist.component';
+import { ManagementComponent } from './views/management/management.component';
+import { UploadMediaComponent } from './views/management/upload-media/upload-media.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'users', pathMatch: 'full' },
-  { path: 'users', component: HomeComponent, canActivate: [], data: { animation: 'anim-1' } },
-  { path: 'users/:id', component: ProfileComponent, canActivate: [], data: { animation: 'anim-3' } },
-  { path: 'users/:id/playlist/:pid', component: PlaylistComponent, canActivate: [], data: { animation: 'anim-3' } },
-  { path: 'chat', component: ChatComponent, canActivate: [], data: { animation: 'anim-2' } },
+  { path: 'users', component: HomeComponent, data: { animation: 'anim-1' } },
+  { path: 'users/:id', component: ProfileComponent, data: { animation: 'anim-3' } },
+  { path: 'users/:id/playlist/:pid', component: PlaylistComponent, data: { animation: 'anim-3_1' } },
+  {
+    path: 'users/:id/mgt', component: ManagementComponent, data: { animation: 'anim-3_2' },
+    children: [
+      { path: '', redirectTo: 'upload', pathMatch: 'full' },
+      { path: 'upload', component: UploadMediaComponent, data: { animation: 'anim-3_2-1' } }
+    ]
+  },
+  { path: 'chat', component: ChatComponent, data: { animation: 'anim-2' } },
   {
     path: 'auth', component: AuthComponent, canActivate: [AuthGuard], data: { animation: 'anim-4' },
     children: [

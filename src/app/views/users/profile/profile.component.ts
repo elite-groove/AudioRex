@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   panels = [
     {
       active: true,
-      name: 'This is panel header 1',
+      name: 'The best album',
       disabled: false
     },
     {
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     },
     {
       active: false,
-      disabled: true,
+      disabled: false,
       name: 'This is panel header 3'
     }
   ];

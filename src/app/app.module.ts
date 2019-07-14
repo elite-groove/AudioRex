@@ -48,6 +48,8 @@ import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './classes/custom-url-serializer';
 import { DatestringPipe } from './pipes/datestring.pipe';
 import { PlaylistComponent } from './views/users/playlist/playlist.component';
+import { ManagementComponent } from './views/management/management.component';
+import { UploadMediaComponent } from './views/management/upload-media/upload-media.component';
 
 registerLocaleData(en);
 
@@ -65,7 +67,9 @@ registerLocaleData(en);
     RegisterComponent,
     DateformatPipe,
     DatestringPipe,
-    PlaylistComponent
+    PlaylistComponent,
+    ManagementComponent,
+    UploadMediaComponent
   ],
   imports: [
     BrowserModule,

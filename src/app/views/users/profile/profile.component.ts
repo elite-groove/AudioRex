@@ -13,25 +13,29 @@ export class ProfileComponent implements OnInit {
 
   panels = [
     {
+      _id: Math.round(Math.random() * 99999999999999),
       active: true,
       name: 'The best album',
       disabled: false
     },
     {
+      _id: Math.round(Math.random() * 99999999999999),
       active: false,
       disabled: false,
       name: 'This is panel header 2'
     },
     {
+      _id: Math.round(Math.random() * 99999999999999),
       active: false,
       disabled: false,
       name: 'This is panel header 3'
     }
   ];
+  userId: string;
 
   constructor(private usersService: UsersService, private router: ActivatedRoute) {
-    const userId = this.router.snapshot.params.id;
-    this.usersService.getUser(userId).subscribe(
+    this.userId = this.router.snapshot.params.id;
+    this.usersService.getUser(this.userId).subscribe(
       (resp) => {
         console.log(resp);
         this.profile = resp;

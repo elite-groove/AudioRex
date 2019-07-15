@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { PaginationResponse } from 'server/interfaces/pagination-response';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UsersService) {
     this.userService.getUsers().subscribe(
-      (pagination: PaginationResponse) => {
+      (pagination: any) => {
         console.log(pagination);
         this.users = pagination.data;
       }

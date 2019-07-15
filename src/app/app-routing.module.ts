@@ -9,7 +9,8 @@ import { AuthComponent } from './views/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PlaylistComponent } from './views/users/playlist/playlist.component';
 import { ManagementComponent } from './views/management/management.component';
-import { UploadMediaComponent } from './views/management/upload-media/upload-media.component';
+import { UploadAudioComponent } from './views/management/upload-audio/upload-audio.component';
+import { ChooseMediaTypeComponent } from './views/management/choose-media-type/choose-media-type.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'users', pathMatch: 'full' },
@@ -19,8 +20,9 @@ const routes: Routes = [
   {
     path: 'users/:id/mgt', component: ManagementComponent, data: { animation: 'anim-3_2' },
     children: [
-      { path: '', redirectTo: 'upload', pathMatch: 'full' },
-      { path: 'upload', component: UploadMediaComponent, data: { animation: 'anim-3_2-1' } }
+      { path: '', redirectTo: 'choose-media-type', pathMatch: 'full' },
+      { path: 'upload', component: UploadAudioComponent, data: { animation: 'anim-3_2-1' } },
+      { path: 'choose-media-type', component: ChooseMediaTypeComponent, data: { animation: 'anim-3_2-2' } }
     ]
   },
   { path: 'chat', component: ChatComponent, data: { animation: 'anim-2' } },

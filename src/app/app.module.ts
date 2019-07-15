@@ -43,7 +43,9 @@ import { CustomUrlSerializer } from './classes/custom-url-serializer';
 import { DatestringPipe } from './pipes/datestring.pipe';
 import { PlaylistComponent } from './views/users/playlist/playlist.component';
 import { ManagementComponent } from './views/management/management.component';
-import { UploadMediaComponent } from './views/management/upload-media/upload-media.component';
+import { UploadAudioComponent } from './views/management/upload-audio/upload-audio.component';
+import { ChooseMediaTypeComponent } from './views/management/choose-media-type/choose-media-type.component';
+import { UploadVideoComponent } from './views/management/upload-video/upload-video.component';
 
 registerLocaleData(en);
 
@@ -63,7 +65,9 @@ registerLocaleData(en);
     DatestringPipe,
     PlaylistComponent,
     ManagementComponent,
-    UploadMediaComponent
+    UploadAudioComponent,
+    ChooseMediaTypeComponent,
+    UploadVideoComponent
   ],
   imports: [
     BrowserModule,

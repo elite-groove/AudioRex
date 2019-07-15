@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadMediaComponent } from './upload-media.component';
+import { UploadAudioComponent } from './upload-audio.component';
 
 describe('UploadMediaComponent', () => {
-  let component: UploadMediaComponent;
-  let fixture: ComponentFixture<UploadMediaComponent>;
+  let component: UploadAudioComponent;
+  let fixture: ComponentFixture<UploadAudioComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadMediaComponent ]
+      declarations: [ UploadAudioComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadMediaComponent);
+    fixture = TestBed.createComponent(UploadAudioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
